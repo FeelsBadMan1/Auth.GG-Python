@@ -83,6 +83,8 @@ class AuthGG:
                             self.is_initialized = True
                             self.freemode += resp_json1["freemode"]
                             if resp_json1["developermode"] == "Enabled":
+                                self.can_login = True    
+                                self.can_register = True
                                 return (
                                     print("[!] Application is in Developer Mode, bypassing integrity and update check!"),
                                     print("[!] Your applications hash has been saved to integrity.txt, please refer to this when your application is ready for release!"),
