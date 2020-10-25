@@ -18,7 +18,7 @@ class AuthGG:
         self.is_initialized = False
         self.can_login = False
         self.can_register = False
-        self.freemode = False
+        self.freemode = ""
 
     def WriteIntegrity(self):
         with open("integrity.txt", "w", errors="ignore") as m:
@@ -81,7 +81,7 @@ class AuthGG:
                     else:
                         if resp_json1["status"] == "Enabled":
                             self.is_initialized = True
-                            self.freemode = resp_json1["freemode"]
+                            self.freemode += resp_json1["freemode"]
                             if resp_json1["developermode"] == "Enabled":
                                 return (
                                     print("[!] Application is in Developer Mode, bypassing integrity and update check!"),
@@ -97,7 +97,7 @@ class AuthGG:
                                         time.sleep(3),
                                         os._exit(0)
                                     )
-                                if not self.freemode:
+                                if self.freemode == "Disabled":
                                     if resp_json1["hash"] != self.hash:
                                         return (
                                             print("[!] File has been tampered with, couldn't verify integrity!!"),
