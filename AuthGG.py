@@ -95,7 +95,7 @@ class AuthGG:
                                 if self.version != resp_json1["version"]:
                                     return (
                                         print("Update {} available, redirecting to update!".format(resp_json1["version"])),
-                                        os.system("open {}".format(resp_json1["downloadlink"])),
+                                        os.system("start {}".format(resp_json1["downloadlink"])),
                                         time.sleep(3),
                                         os._exit(0)
                                     )
