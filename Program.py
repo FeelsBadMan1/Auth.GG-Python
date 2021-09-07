@@ -97,7 +97,7 @@ def main_menu():
         print("[>] Key: ", end='')
         key = str(input())
         print()
-        if (AuthGG.AIO(key)):
+        if AuthGG.AIO(key):
             print("[!] Welcome back to my application!")
             time.sleep(3)
             os._exit(0)
