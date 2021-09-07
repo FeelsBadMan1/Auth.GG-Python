@@ -351,10 +351,7 @@ class AuthGG:
                 resp_5 = sess.post("https://api.auth.gg/v1/", data=data, proxies=None)
                 with resp_5:
                     resp_json5 = json.loads(resp_5.text)
-                    if resp_json5["result"] == "success":
-                        return True
-                    else:
-                        return False
+                    return resp_json5["result"] == "success"
         except:
             return (
                 print("[!] Something went wrong, contact administrator!"), 
@@ -377,10 +374,7 @@ class AuthGG:
         if AuthGG.AIOLogin(key):
             return True
         else:
-            if AuthGG.AIORegister(key):
-                return True
-            else:
-                return False
+            return bool(AuthGG.AIORegister(key))
 
     def ExtendSubscription(self, username, password, license):
         if not AuthGG.is_initialized:
