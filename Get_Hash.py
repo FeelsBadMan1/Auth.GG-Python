@@ -11,7 +11,7 @@ def Get_Hash(filepath) -> str:
                     if not data:
                         break
                     md5.update(data)
-            return (md5.hexdigest())
+            return md5.hexdigest()
         except Exception as e:
             return 
             (print("[!] Hash Calculating Failed!"), 
