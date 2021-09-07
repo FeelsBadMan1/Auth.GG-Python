@@ -91,25 +91,24 @@ class AuthGG:
                                     AuthGG.WriteIntegrity(),
                                     time.sleep(3)
                                     )
-                            else:
-                                if self.version != resp_json1["version"]:
+                            if self.version != resp_json1["version"]:
+                                return (
+                                    print("Update {} available, redirecting to update!".format(resp_json1["version"])),
+                                    os.system("start {}".format(resp_json1["downloadlink"])),
+                                    time.sleep(3),
+                                    os._exit(0)
+                                )
+                            if self.freemode == "Disabled":
+                                if resp_json1["hash"] != self.hash:
                                     return (
-                                        print("Update {} available, redirecting to update!".format(resp_json1["version"])),
-                                        os.system("start {}".format(resp_json1["downloadlink"])),
+                                        print("[!] File has been tampered with, couldn't verify integrity!!"),
                                         time.sleep(3),
                                         os._exit(0)
                                     )
-                                if self.freemode == "Disabled":
-                                    if resp_json1["hash"] != self.hash:
-                                        return (
-                                            print("[!] File has been tampered with, couldn't verify integrity!!"),
-                                            time.sleep(3),
-                                            os._exit(0)
-                                        )
-                                if resp_json1["login"] == "Enabled":
-                                    self.can_login = True
-                                if resp_json1["register"] == "Enabled":
-                                    self.can_register = True
+                            if resp_json1["login"] == "Enabled":
+                                self.can_login = True
+                            if resp_json1["register"] == "Enabled":
+                                self.can_register = True
                         else:
                             return (
                                 print("[!] Looks like this application is disabled, please try again later!"),
@@ -162,30 +161,29 @@ class AuthGG:
                     resp_json2 = json.loads(resp_2.text)
                     if resp_json2["result"] == "success":
                         return True
-                    elif resp_json2["result"] == "invalid_license":
+                    if resp_json2["result"] == "invalid_license":
                         return (
                             print("[!] License does not exist!"), 
                             time.sleep(3), 
                             os._exit(0)
                         )
-                    elif resp_json2["result"] == "email_used":
+                    if resp_json2["result"] == "email_used":
                         return (
                            print("[!] Email has already been used!"), 
                             time.sleep(3), 
                             os._exit(0) 
                         )
-                    elif resp_json2["result"] == "invalid_username":
+                    if resp_json2["result"] == "invalid_username":
                         return (
                             print("[!] You entered an invalid/used username!"), 
                             time.sleep(3), 
                             os._exit(0)
                         )
-                    else:
-                        return (
-                            print("[!] Something went wrong, contact administrator!"), 
-                            time.sleep(3), 
-                            os._exit(0)
-                        )
+                    return (
+                        print("[!] Something went wrong, contact administrator!"), 
+                        time.sleep(3), 
+                        os._exit(0)
+                    )
                     
         except:
             return (
@@ -231,36 +229,35 @@ class AuthGG:
                     resp_json3 = json.loads(resp_3.text)
                     if resp_json3["result"] == "success":
                         return True
-                    elif  resp_json3["result"] == "invalid_details":
+                    if  resp_json3["result"] == "invalid_details":
                         return (
                             print("[!] Sorry, your username/password does not match!"), 
                             time.sleep(3), 
                             os._exit(0) 
                         )
-                    elif  resp_json3["result"] == "time_expired":
+                    if  resp_json3["result"] == "time_expired":
                         return (
                             print("[!] Your subscription has expired!"), 
                             time.sleep(3), 
                             os._exit(0) 
                         )
-                    elif  resp_json3["result"] == "hwid_updated":
+                    if  resp_json3["result"] == "hwid_updated":
                         return (
                             print("[!] New machine has been binded, re-open the application!"), 
                             time.sleep(3), 
                             os._exit(0) 
                         )
-                    elif  resp_json3["result"] == "invalid_hwid":
+                    if  resp_json3["result"] == "invalid_hwid":
                         return (
                             print("[!] This user is binded to another computer, please contact support!"), 
                             time.sleep(3), 
                             os._exit(0) 
                         )
-                    else:
-                        return (
-                            print("[!] Something went wrong, contact administrator!"), 
-                            time.sleep(3), 
-                            os._exit(0)
-                        )
+                    return (
+                        print("[!] Something went wrong, contact administrator!"), 
+                        time.sleep(3), 
+                        os._exit(0)
+                    )
         except:
             return (
                 print("[!] Something went wrong, contact administrator!"), 
@@ -293,32 +290,31 @@ class AuthGG:
                     resp_json4 = json.loads(resp_4.text)
                     if resp_json4["result"] == "success":
                         return True
-                    elif  resp_json4["result"] == "invalid_details":
+                    if  resp_json4["result"] == "invalid_details":
                         return False
-                    elif  resp_json4["result"] == "time_expired":
+                    if  resp_json4["result"] == "time_expired":
                         return (
                             print("[!] Your subscription has expired!"), 
                             time.sleep(3), 
                             os._exit(0) 
                         )
-                    elif  resp_json4["result"] == "hwid_updated":
+                    if  resp_json4["result"] == "hwid_updated":
                         return (
                             print("[!] New machine has been binded, re-open the application!"), 
                             time.sleep(3), 
                             os._exit(0) 
                         )
-                    elif  resp_json4["result"] == "invalid_hwid":
+                    if  resp_json4["result"] == "invalid_hwid":
                         return (
                             print("[!] This user is binded to another computer, please contact support!"), 
                             time.sleep(3), 
                             os._exit(0) 
                         )
-                    else:
-                        return (
-                            print("[!] Something went wrong, contact administrator!"), 
-                            time.sleep(3), 
-                            os._exit(0)
-                        )
+                    return (
+                        print("[!] Something went wrong, contact administrator!"), 
+                        time.sleep(3), 
+                        os._exit(0)
+                    )
                     
         except:
             return (
@@ -353,8 +349,7 @@ class AuthGG:
                     resp_json5 = json.loads(resp_5.text)
                     if resp_json5["result"] == "success":
                         return True
-                    else:
-                        return False
+                    return False
         except:
             return (
                 print("[!] Something went wrong, contact administrator!"), 
@@ -376,11 +371,9 @@ class AuthGG:
             )
         if AuthGG.AIOLogin(key):
             return True
-        else:
-            if AuthGG.AIORegister(key):
-                return True
-            else:
-                return False
+        if AuthGG.AIORegister(key):
+            return True
+        return False
 
     def ExtendSubscription(self, username, password, license):
         if not AuthGG.is_initialized:
@@ -413,24 +406,23 @@ class AuthGG:
                     resp_json6 = json.loads(resp_6.text)
                     if resp_json6["result"] == "success":
                         return True
-                    elif resp_json6["result"] == "invalid_license":
+                    if resp_json6["result"] == "invalid_license":
                         return (
                             print("[!] License does not exist!"),
                             time.sleep(3), 
                             os._exit(0)
                         )
-                    elif resp_json6["result"] == "invalid_details":
+                    if resp_json6["result"] == "invalid_details":
                         return (
                             print("[!] Your user details are invalid!"),
                             time.sleep(3), 
                             os._exit(0)
                         )
-                    else:
-                        return (
-                            print("[!] Something went wrong, contact administrator!"), 
-                            time.sleep(3), 
-                            os._exit(0)
-                            )
+                    return (
+                        print("[!] Something went wrong, contact administrator!"), 
+                        time.sleep(3), 
+                        os._exit(0)
+                        )
         except:
             return (
                 print("[!] Something went wrong, contact administrator!"), 
